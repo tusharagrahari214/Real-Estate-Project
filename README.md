@@ -48,6 +48,6 @@ Welcome to the Real Estate Management System! 🚀 This project embodies a sophi
 
 ## Credits 🙌
 
-Developed with passion and precision by Gaurav Kumar & Team. For inquiries or feedback, reach out to gauravkumar1w@gmail.com.
+Developed with passion and precision by Tushar. For inquiries or feedback, reach out to tusharagrahari10@gmail.com.
 
 Acknowledgments to the brilliant creators of Express.js, CSS, Node.js, MySQL, and external APIs for their invaluable contributions.
