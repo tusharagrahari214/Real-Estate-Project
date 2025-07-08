@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Property Data</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="css/agent2.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <a href="/">
+          <img src="images/logo.jpg" alt="brand logo" />
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a id="home" href="/">Home</a></li>
+          <li><a id="about" href="/about">About</a></li>
+          <li><a id="contact" href="/contact">Contact</a></li>
+          <li><a id="find-agent" href="/find">Find Agent</a></li>
+        </ul>
+      </nav>
+    </header>
+    <h1>Add Property Data</h1>
+    <form action="insert_property" method="post">
+      <label for="pid">Property ID:</label>
+      <input class="field" type="text" id="pid" name="pid" required />
+
+      <label for="price">Price:</label>
+      <input
+        class="field"
+        type="number"
+        id="price"
+        name="price"
+        required
+        step="0.01"
+      />
+
+      <label for="status">Status:</label>
+      <input class="field" type="text" id="status" name="status" required />
+
+      <label for="type">nuber_of_bedroom:</label>
+      <input class="field" type="text" id="type" name="type" required />
+
+      <label for="seller_id">Seller ID:</label>
+      <input
+        class="field"
+        type="text"
+        id="seller_id"
+        name="seller_id"
+        required
+      />
+
+      <label for="yoc">Year of Construction:</label>
+      <input class="field" type="number" id="yoc" name="yoc" required />
+
+      <label for="city">City:</label>
+      <input class="field" type="text" id="city" name="city" required />
+
+      <label for="street">Street:</label>
+      <input class="field" type="text" id="street" name="street" required />
+
+      <label for="postalcode">Postal Code:</label>
+      <input
+        class="field"
+        type="text"
+        id="postalcode"
+        name="postalcode"
+        required
+      />
+
+      <label for="agent_id">Agent ID:</label>
+      <input class="field" type="text" id="agent_id" name="agent_id" required />
+
+      <input type="submit" value="Add Property" />
+    </form>
+
+    <footer>
+      <img src="images/logo.jpg" alt="Company Logo" class="logo" />
+      <h3>&copy;2023 Property.com</h3>
+      <div class="social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </footer>
+  </body>
+</html>

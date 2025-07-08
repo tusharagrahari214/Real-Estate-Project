@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/result.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <a href="/">
+          <img src="images/logo.jpg" alt="brand logo" />
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a id="home" href="/">Home</a></li>
+          <li><a id="about" href="/about">About</a></li>
+          <li><a id="contact" href="/contact">Contact</a></li>
+          <li><a id="find-agent" href="/find">Find Agent</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div id="results">
+      <% if (fields && rows) { %>
+      <table>
+        <thead>
+          <tr>
+            <% fields.forEach(field => { %>
+            <th><%= field %></th>
+            <% }); %>
+          </tr>
+        </thead>
+        <tbody>
+          <% rows.forEach(row => { %>
+          <tr>
+            <% row.forEach(value => { %>
+            <td><%= value %></td>
+            <% }); %>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+      <% } else if (message) { %>
+      <p><%= message %></p>
+      <% } %>
+    </div>
+    <a id="back" href="/back2">
+      <button class="back-button">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>Back
+      </button>
+    </a>
+    <footer>
+      <img src="images/logo.jpg" alt="Company Logo" class="logo" />
+      <div class="social">
+        <a href="https://www.facebook.com/"
+          ><i class="fab fa-facebook-f"></i
+        ></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/agraharigaurav8090/"
+          ><i class="fab fa-instagram"></i
+        ></a>
+      </div>
+    </footer>
+  </body>
+</html>

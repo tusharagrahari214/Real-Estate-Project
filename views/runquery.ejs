@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Real Estate Listings</title>
+    <link rel="stylesheet" type="text/css" href="css/runquery.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <a href="/">
+          <img src="images/logo.jpg" alt="brand logo" />
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a id="home" href="/">Home</a></li>
+          <li><a id="about" href="/about">About</a></li>
+          <li><a id="contact" href="/contact">Contact</a></li>
+          <li><a id="find-agent" href="/find">Find Agent</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="run">
+      <h2>Search according to your requirement</h2>
+      <form action="/runquery" method="post">
+        <label for="topic">Select any one</label>
+        <select id="topic" name="topic">
+          <option value="q1">
+            List the houses in your city (for example Delhi) that are built
+            later than 2020 and are available for rent.
+          </option>
+          <option value="q2">
+            Find the addresses of the houses in your city(e.g Banglore) costing
+            between Rs.30,00,000 and Rs. 50,00,000
+          </option>
+          <option value="q3">
+            Find the addresses of the houses for rent in M.G.Road with at least
+            2 bedrooms and costing less than Rs.15,000 per month.
+          </option>
+          <option value="q4">
+            Find the name of the agent who has sold the most property in the
+            year 2023 by total amount in rupees.
+          </option>
+          <option value="q5">
+            For each agent, compute the average selling price of properties sold
+            in 2022, and the average time the propertywas on the market.
+          </option>
+          <option value="q6">
+            List the details of the most expensive houses
+          </option>
+          <option value="q7">
+            The houses with the highest rent, in the database.
+          </option>
+        </select>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <footer>
+      <img src="images/logo.jpg" alt="Company Logo" class="logo" />
+      <h3>&copy;2023 Property.com</h3>
+      <div class="social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Buyer Data</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="css/agent2.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <a href="/">
+          <img src="images/logo.jpg" alt="brand logo" />
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a id="home" href="/">Home</a></li>
+          <li><a id="about" href="/about">About</a></li>
+          <li><a id="contact" href="/contact">Contact</a></li>
+          <li><a id="find-agent" href="/find">Find Agent</a></li>
+        </ul>
+      </nav>
+    </header>
+    <h1>Add Buyer Data</h1>
+    <form action="insert_buyer" method="post">
+      <label for="buyer_id">Buyer ID:</label>
+      <input class="field" type="text" id="buyer_id" name="buyer_id" required />
+
+      <label for="fname">First Name:</label>
+      <input class="field" type="text" id="fname" name="fname" required />
+
+      <label for="lname">Last Name:</label>
+      <input class="field" type="text" id="lname" name="lname" />
+
+      <label for="phoneno">Phone Number:</label>
+      <input class="field" type="tel" id="phoneno" name="phoneno" required />
+
+      <label for="email">Email:</label>
+      <input class="field" type="email" id="email" name="email" />
+
+      <label for="agent_id">Agent ID:</label>
+      <input class="field" type="text" id="agent_id" name="agent_id" />
+
+      <input type="submit" value="Add Buyer" />
+    </form>
+
+    <footer>
+      <img src="images/logo.jpg" alt="Company Logo" class="logo" />
+      <h3>&copy;2023 Property.com</h3>
+      <div class="social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </footer>
+  </body>
+</html>

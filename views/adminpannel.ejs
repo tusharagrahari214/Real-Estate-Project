@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Database Admin Page</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/adminpannel.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <a href="/">
+          <img src="images/logo.jpg" alt="brand logo" />
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a id="find-agent" href="/find">Find Agent</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <form id="query-form" action="/query" method="POST">
+        <label for="query">Enter your query:</label>
+        <textarea id="query" name="query"></textarea>
+        <button type="submit">Run Query</button>
+      </form>
+      <div id="results">
+        <h1><%=message %></h1>
+      </div>
+    </main>
+    <footer>
+      <img src="images/logo.jpg" alt="Company Logo" class="logo" />
+      <h3>&copy;2023 Property.com</h3>
+      <div class="social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </footer>
+    <scripts> </scripts>
+  </body>
+</html>
