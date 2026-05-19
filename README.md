@@ -2,7 +2,9 @@
 
 A full-stack real estate platform for buying, renting, and managing properties across India. Built with **Node.js**, **Express**, **MongoDB Atlas**, and **EJS** — inspired by platforms like MagicBricks and NoBroker.
 
-> **Live Demo:** Run locally at `http://localhost:3000`
+## Live Demo
+
+🔗 https://your-project-name.onrender.com
 
 ---
 
