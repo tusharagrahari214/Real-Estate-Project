@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Property Details — My Dream Home</title><link rel="stylesheet" href="/css/global.css"/><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous"/></head>
+<body>
+  <nav class="navbar"><div class="nav-container"><a href="/" class="logo"><img src="/images/logo.jpg" alt="Logo"/>My Dream<span>Home</span></a><div class="nav-links" id="navLinks"><a href="/">Home</a><a href="/properties">Properties</a><a href="/about">About</a><a href="/contact">Contact</a><% if (user) { %><a href="/change-password">Password</a><a href="/logout" class="btn btn-primary btn-sm">Logout</a><% } else { %><a href="/login" class="btn btn-primary btn-sm">Login</a><% } %></div><div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></div></div></nav>
+  <section class="section" style="padding-top:100px">
+    <div class="container">
+      <a href="/properties" class="back-link"><i class="fas fa-arrow-left"></i> Back to Properties</a>
+      <div class="grid-2" style="gap:40px;align-items:start">
+        <div>
+          <div class="card-img-wrap" style="height:350px;border-radius:var(--radius-lg);overflow:hidden">
+            <img src="<%= property.images && property.images.length > 0 ? '/uploads/' + property.images[0] : '/images/index.jpg' %>" alt="<%= property.title %>" style="width:100%;height:100%;object-fit:cover"/>
+          </div>
+          <% if (property.images && property.images.length > 1) { %>
+          <div style="display:flex;gap:8px;margin-top:12px;overflow-x:auto">
+            <% property.images.forEach(function(img) { %><img src="/uploads/<%= img %>" style="width:80px;height:60px;object-fit:cover;border-radius:8px;cursor:pointer" /><% }); %>
+          </div><% } %>
+        </div>
+        <div>
+          <div style="display:flex;gap:8px;margin-bottom:12px">
+            <span class="badge badge-<%= property.listing_type %>"><%= property.listing_type %></span>
+            <span class="badge badge-<%= property.property_type %>"><%= property.property_type %></span>
+            <% if (property.bachelor_allowed === false) { %><span class="badge badge-no-bachelor">No Bachelors</span><% } else { %><span class="badge badge-bachelor">Bachelor OK</span><% } %>
+            <% if (property.status === 'locked') { %><span class="badge badge-sold">Locked</span><% } %>
+          </div>
+          <h1 style="font-size:1.8rem;font-weight:800;margin-bottom:8px"><%= property.title || property.street %></h1>
+          <p class="card-location" style="font-size:1rem;margin-bottom:16px"><i class="fas fa-map-marker-alt"></i> <%= property.street %>, <%= property.city %> - <%= property.postalcode %></p>
+          <div class="price" style="font-size:2rem;font-weight:800;color:var(--primary);margin-bottom:20px">₹<%= property.price ? property.price.toLocaleString('en-IN') : '0' %><% if (property.listing_type === 'rent') { %><span style="font-size:1rem;font-weight:400;color:var(--text-light)">/month</span><% } %></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px">
+            <div style="padding:12px;background:var(--bg-alt);border-radius:var(--radius)"><i class="fas fa-bed" style="color:var(--primary)"></i> <strong><%= property.number_of_bedroom %></strong> Bedrooms</div>
+            <% if (property.area_sqft) { %><div style="padding:12px;background:var(--bg-alt);border-radius:var(--radius)"><i class="fas fa-ruler-combined" style="color:var(--primary)"></i> <strong><%= property.area_sqft %></strong> sqft</div><% } %>
+            <div style="padding:12px;background:var(--bg-alt);border-radius:var(--radius)"><i class="fas fa-couch" style="color:var(--primary)"></i> <%= property.furnished %></div>
+            <div style="padding:12px;background:var(--bg-alt);border-radius:var(--radius)"><i class="fas fa-calendar" style="color:var(--primary)"></i> Built <%= property.yoc %></div>
+          </div>
+          <% if (property.description) { %><p style="color:var(--text-light);line-height:1.7;margin-bottom:24px"><%= property.description %></p><% } %>
+          <p style="font-size:0.85rem;color:var(--text-light)">Property ID: #<%= property.pid %> | Listed: <%= property.year_of_listing %></p>
+
+          <% if (agent) { %>
+          <div style="margin-top:24px;padding:24px;background:var(--bg-alt);border-radius:var(--radius-lg);border:1px solid var(--border)">
+            <h3 style="margin-bottom:12px"><i class="fas fa-user-tie" style="color:var(--primary)"></i> Assigned Agent</h3>
+            <p style="font-weight:700;font-size:1.1rem"><%= agent.fname %> <%= agent.lname %></p>
+            <p style="color:var(--text-light);font-size:0.9rem;margin-top:4px"><i class="fas fa-phone" style="margin-right:6px"></i><%= agent.phoneno %></p>
+            <p style="color:var(--text-light);font-size:0.9rem"><i class="fas fa-envelope" style="margin-right:6px"></i><%= agent.email %></p>
+            <p style="color:var(--text-light);font-size:0.9rem"><i class="fas fa-map-marker-alt" style="margin-right:6px"></i><%= agent.city %></p>
+            <p style="color:var(--text-light);font-size:0.85rem;margin-top:8px">Properties Sold: <%= agent.NOP_sale %></p>
+          </div><% } %>
+
+          <% if (user && user.role === 'buyer' && property.status !== 'sold' && property.status !== 'locked') { %>
+          <form action="/lock-property" method="POST" style="margin-top:20px">
+            <input type="hidden" name="pid" value="<%= property.pid %>"/>
+            <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="return confirm('Lock this property? The agent will be notified.')"><i class="fas fa-lock"></i> Lock This Property</button>
+          </form>
+          <% } else if (!user) { %>
+          <a href="/login" class="btn btn-outline btn-block" style="margin-top:20px"><i class="fas fa-sign-in-alt"></i> Login as Buyer to Lock</a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </section>
+</body></html>

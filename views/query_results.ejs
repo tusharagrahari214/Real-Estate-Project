@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Results — My Dream Home</title><link rel="stylesheet" href="/css/global.css"/><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous"/></head>
+<body>
+  <nav class="navbar"><div class="nav-container"><a href="/" class="logo"><img src="/images/logo.jpg" alt="Logo"/>My Dream<span>Home</span></a><div class="nav-links" id="navLinks"><a href="/">Home</a><a href="/properties">Properties</a><% if (user) { %><a href="/logout" class="btn btn-primary btn-sm">Logout</a><% } %></div><div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></div></div></nav>
+  <section class="section" style="padding-top:100px">
+    <div class="container">
+      <a href="javascript:history.back()" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
+      <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:16px">Query <span class="text-red">Results</span></h2>
+      <% if (fields && rows && rows.length) { %>
+        <p class="text-light" style="margin-bottom:16px"><strong><%= rows.length %></strong> records</p>
+        <div class="table-wrap" style="overflow-x:auto">
+          <table><thead><tr><% fields.forEach(function(f){ %><th><%= f %></th><% }); %></tr></thead>
+            <tbody><% rows.forEach(function(r){ %><tr><% r.forEach(function(v){ %><td><%= v %></td><% }); %></tr><% }); %></tbody></table>
+        </div>
+      <% } else { %><div class="empty-state"><i class="fas fa-search"></i><h3>No results</h3></div><% } %>
+    </div>
+  </section>
+</body></html>

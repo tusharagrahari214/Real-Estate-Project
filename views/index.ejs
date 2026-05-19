@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>My Dream Home — Find Your Perfect Property</title>
+  <meta name="description" content="Find your dream home — buy, rent, hostel & PG properties across India." />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    crossorigin="anonymous" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo"><img src="images/logo.jpg" alt="My Dream Home" />My Dream<span>Home</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="/" class="active">Home</a><a href="/properties">Properties</a><a href="/about">About</a><a
+          href="/contact">Contact</a><a href="/find">Find Agent</a>
+        <% if (user) { %>
+          <% if (user.role==='admin' ) { %><a href="/admin-dashboard">Dashboard</a>
+            <% } %>
+              <% if (user.role==='office' ) { %><a href="/office-dashboard">Dashboard</a>
+                <% } %>
+                  <% if (user.role==='agent' ) { %><a href="/agent-dashboard">Dashboard</a>
+                    <% } %>
+                      <% if (user.role==='seller' ) { %><a href="/seller-dashboard">Dashboard</a>
+                        <% } %>
+                          <% if (user.role==='buyer' ) { %><a href="/buyer-dashboard">Dashboard</a>
+                            <% } %>
+                              <a href="/logout" class="btn btn-primary btn-sm">Logout (<%= user.name %>)</a>
+                              <% } else { %>
+                                <a href="/login" class="btn btn-outline btn-sm">Login</a>
+                                <a href="/register" class="btn btn-primary btn-sm">Sign Up</a>
+                                <% } %>
+      </div>
+      <div class="hamburger"
+        onclick="document.getElementById('navLinks').classList.toggle('open');this.classList.toggle('active')">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">🏠 India's Trusted Property Platform</div>
+      <h1>Find Your <span class="text-red">Dream Home</span> Today</h1>
+      <p>Discover apartments, houses, hostels & PGs across India's top cities. Buy, rent, or find the perfect
+        accommodation.</p>
+      <div class="hero-buttons">
+        <a href="/properties?type=buy" class="btn btn-primary btn-lg"><i class="fas fa-home"></i> Buy Property</a>
+        <a href="/properties?type=rent" class="btn btn-outline btn-lg"><i class="fas fa-key"></i> Rent Property</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <h3>
+            <%= propertyCount %>+
+          </h3>
+          <p>Properties Listed</p>
+        </div>
+        <div class="hero-stat">
+          <h3>
+            <%= agentCount %>+
+          </h3>
+          <p>Trusted Agents</p>
+        </div>
+        <div class="hero-stat">
+          <h3>
+            <%= cityCount %>+
+          </h3>
+          <p>Cities Covered</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt text-center">
+    <div class="container">
+      <h2 class="section-title">Explore by <span class="text-red">Category</span></h2>
+      <p class="section-subtitle">Whether you're buying, renting, or looking for student accommodation.</p>
+      <div class="grid-4">
+        <a href="/properties?type=buy" class="card">
+          <div class="card-img-wrap"><img src="images/4.jpg" alt="Buy" /></div>
+          <div class="card-body text-center">
+            <h3>🏡 Buy</h3>
+            <p class="text-light" style="font-size:0.9rem;margin-top:6px">Find your forever home</p>
+          </div>
+        </a>
+        <a href="/properties?type=rent" class="card">
+          <div class="card-img-wrap"><img src="images/2.jpg" alt="Rent" /></div>
+          <div class="card-body text-center">
+            <h3>🔑 Rent</h3>
+            <p class="text-light" style="font-size:0.9rem;margin-top:6px">Apartments & houses</p>
+          </div>
+        </a>
+        <a href="/properties?ptype=hostel" class="card">
+          <div class="card-img-wrap"><img src="images/6.jpg" alt="Hostel" /></div>
+          <div class="card-body text-center">
+            <h3>🏢 Hostel</h3>
+            <p class="text-light" style="font-size:0.9rem;margin-top:6px">Student & working hostels</p>
+          </div>
+        </a>
+        <a href="/properties?ptype=pg" class="card">
+          <div class="card-img-wrap"><img src="images/img1.jpg" alt="PG" /></div>
+          <div class="card-body text-center">
+            <h3>🛏️ PG</h3>
+            <p class="text-light" style="font-size:0.9rem;margin-top:6px">Paying guest</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section text-center">
+    <div class="container">
+      <h2 class="section-title">Featured <span class="text-red">Properties</span></h2>
+      <p class="section-subtitle">Hand-picked properties from our top agents.</p>
+      <div class="grid-3">
+        <% if (featuredProperties.length> 0) { featuredProperties.forEach(function(p) { %>
+          <a href="/property/<%= p.pid %>" class="card" style="text-decoration:none;color:inherit">
+            <div class="card-img-wrap">
+              <img src="<%= p.images && p.images.length > 0 ? '/uploads/' + p.images[0] : 'images/index.jpg' %>"
+                alt="<%= p.title %>" />
+              <div class="card-badges">
+                <span class="badge badge-<%= p.listing_type %>">
+                  <%= p.listing_type %>
+                </span>
+                <% if (p.property_type) { %><span class="badge badge-<%= p.property_type %>">
+                    <%= p.property_type %>
+                  </span>
+                  <% } %>
+                    <% if (p.bachelor_allowed===false) { %><span class="badge badge-no-bachelor">No Bachelors</span>
+                      <% } %>
+              </div>
+            </div>
+            <div class="card-body">
+              <h3>
+                <%= p.title || p.street + ', ' + p.city %>
+              </h3>
+              <div class="price">₹<%= p.price ? p.price.toLocaleString('en-IN') : '0' %>
+                  <% if (p.listing_type==='rent' ) { %><span>/month</span>
+                    <% } %>
+              </div>
+              <div class="card-meta"><span><i class="fas fa-bed"></i>
+                  <%= p.number_of_bedroom %> BHK
+                </span>
+                <% if (p.area_sqft) { %><span><i class="fas fa-ruler-combined"></i>
+                    <%= p.area_sqft %> sqft
+                  </span>
+                  <% } %>
+              </div>
+              <div class="card-location"><i class="fas fa-map-marker-alt"></i>
+                <%= p.street %>, <%= p.city %>
+              </div>
+            </div>
+          </a>
+          <% }); } else { %>
+            <div style="grid-column:1/-1" class="empty-state"><i class="fas fa-building"></i>
+              <h3>No properties yet</h3>
+              <p><a href="/properties" class="text-red">Browse all →</a></p>
+            </div>
+            <% } %>
+      </div>
+      <div style="margin-top:40px"><a href="/properties" class="btn btn-primary">View All Properties <i
+            class="fas fa-arrow-right"></i></a></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><img src="images/logo.jpg" alt="Logo" />My Dream<span style="color:var(--primary)">Home</span>
+        </div>
+        <p>India's trusted property platform.</p>
+        <div class="footer-social"><a href="https://www.facebook.com/tusharagrahari214/" target="_blank"><i
+              class="fab fa-facebook-f"></i></a><a href="https://x.com/tusharagrahari1" target="_blank"><i
+              class="fab fa-twitter"></i></a><a href="https://www.instagram.com/_tushar_agrahari_214/"
+            target="_blank"><i class="fab fa-instagram"></i></a></div>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/properties?type=buy">Buy</a></li>
+          <li><a href="/properties?type=rent">Rent</a></li>
+          <li><a href="/properties?ptype=hostel">Hostels</a></li>
+          <li><a href="/properties?ptype=pg">PG</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/find">Find Agent</a></li>
+          <li><a href="/apply-agent">Become Agent</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:tusharagrahari10@gmail.com"><i class="fas fa-envelope"
+                style="margin-right:6px"></i>tusharagrahari10@gmail.com</a></li>
+          <li><a href="tel:+919219131849"><i class="fas fa-phone" style="margin-right:6px"></i>+91 9794232900</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2024 My Dream Home. Built by Tushar Agrahari.</div>
+  </footer>
+</body>
+
+</html>

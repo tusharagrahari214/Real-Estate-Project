@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Office Panel — My Dream Home</title><link rel="stylesheet" href="css/global.css"/><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous"/></head>
+<body>
+  <nav class="navbar"><div class="nav-container"><a href="/" class="logo"><img src="images/logo.jpg" alt="Logo"/>My Dream<span>Home</span></a><div class="nav-links" id="navLinks"><a href="/">Home</a><a href="/change-password">Password</a><a href="/logout" class="btn btn-primary btn-sm">Logout</a></div><div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></div></div></nav>
+  <div class="page-header"><h1>Office <span class="text-red">Panel</span></h1><p>Manage agents, approve properties & view data</p></div>
+  <section class="section">
+    <div class="container">
+      <% if (msg) { %><div style="background:#E8F5E9;color:#2E7D32;padding:14px;border-radius:12px;margin-bottom:24px;text-align:center;font-weight:600"><i class="fas fa-check-circle"></i> <%= msg %></div><% } %>
+
+      <% if (pending.length > 0) { %>
+      <div class="admin-card" style="margin-bottom:24px;border-left:4px solid #FF8A65">
+        <h3><i class="fas fa-clock" style="color:#FF8A65"></i> Pending Properties (<%= pending.length %>)</h3>
+        <p class="text-light" style="margin-bottom:12px">Properties submitted by sellers awaiting approval</p>
+        <% pending.forEach(function(p) { %><div style="padding:16px;background:var(--bg-alt);border-radius:8px;margin-bottom:8px">
+          <div><strong>#<%= p.pid %></strong> — <%= p.title || p.street %> | ₹<%= p.price ? p.price.toLocaleString('en-IN') : 0 %> | <%= p.city %> | Seller #<%= p.seller_id %></div>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <form action="/office-approve-property" method="POST" style="display:flex;gap:8px;align-items:center"><input type="hidden" name="pid" value="<%= p.pid %>"/><input type="number" name="agent_id" placeholder="Assign Agent ID" required style="padding:8px;border:1px solid var(--border);border-radius:8px;width:140px"/><button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-check"></i> Approve</button></form>
+            <form action="/office-reject-property" method="POST"><input type="hidden" name="pid" value="<%= p.pid %>"/><button type="submit" class="btn btn-outline btn-sm" onclick="return confirm('Reject?')"><i class="fas fa-times"></i> Reject</button></form>
+          </div>
+        </div><% }); %>
+      </div><% } %>
+
+      <% if (applications.length > 0) { %>
+      <div class="admin-card" style="margin-bottom:24px;border-left:4px solid var(--secondary)">
+        <h3><i class="fas fa-user-clock" style="color:var(--secondary)"></i> Agent Applications (<%= applications.length %>)</h3>
+        <% applications.forEach(function(a) { %><div style="padding:12px;background:var(--bg-alt);border-radius:8px;margin-bottom:8px">
+          <strong><%= a.name %></strong> — <%= a.city %> — <%= a.phone %> — <%= a.email %><% if(a.experience) { %> — Exp: <%= a.experience %><% } %>
+          <form action="/office-approve-application" method="POST" style="margin-top:6px"><input type="hidden" name="app_id" value="<%= a._id %>"/><button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-check"></i> Approve</button></form>
+        </div><% }); %>
+      </div><% } %>
+
+      <div class="admin-grid">
+        <div class="admin-card">
+          <h3><i class="fas fa-user-plus"></i> Add Agent + Credentials</h3>
+          <p class="text-light" style="font-size:0.9rem;margin-bottom:12px">Add new agent and assign login in one step</p>
+          <form action="/office-add-agent" method="POST">
+            <div class="form-row"><div class="form-group"><label>First Name</label><input type="text" name="fname" required/></div><div class="form-group"><label>Last Name</label><input type="text" name="lname"/></div></div>
+            <div class="form-row"><div class="form-group"><label>City</label><input type="text" name="city" required/></div><div class="form-group"><label>Street</label><input type="text" name="street"/></div></div>
+            <div class="form-row"><div class="form-group"><label>Postal Code</label><input type="text" name="postalcode"/></div><div class="form-group"><label>Phone</label><input type="text" name="phoneno" required/></div></div>
+            <div class="form-group"><label>Email</label><input type="email" name="email"/></div>
+            <div style="padding:16px;background:rgba(229,57,53,0.05);border-radius:12px;margin-top:12px">
+              <h4 style="margin-bottom:8px;color:var(--primary)"><i class="fas fa-key"></i> Login Credentials</h4>
+              <div class="form-row"><div class="form-group"><label>Username</label><input type="text" name="username" required placeholder="@AgentName"/></div><div class="form-group"><label>Password</label><input type="text" name="password" required placeholder="Agent123"/></div></div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" style="margin-top:12px"><i class="fas fa-plus"></i> Add Agent</button>
+          </form>
+        </div>
+        <div class="admin-card">
+          <h3><i class="fas fa-user-minus"></i> Remove Agent</h3>
+          <form action="/office-delete-agent" method="POST"><div class="form-group"><label>Agent ID</label><input type="number" name="agent_id" required/></div><button type="submit" class="btn btn-outline btn-block btn-sm" onclick="return confirm('Delete agent?')"><i class="fas fa-trash"></i> Remove</button></form>
+          <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border)">
+            <h3 style="font-size:1.1rem;margin-bottom:12px"><i class="fas fa-database" style="color:var(--primary)"></i> View Data</h3>
+            <div class="data-buttons" style="flex-direction:column">
+              <a href="/office-view/agents" class="data-btn" style="text-align:center"><i class="fas fa-users"></i> Agents</a>
+              <a href="/office-view/properties" class="data-btn" style="text-align:center"><i class="fas fa-building"></i> Properties</a>
+              <a href="/office-view/buyers" class="data-btn" style="text-align:center"><i class="fas fa-shopping-cart"></i> Buyers</a>
+              <a href="/office-view/sellers" class="data-btn" style="text-align:center"><i class="fas fa-store"></i> Sellers</a>
+              <a href="/office-view/transactions" class="data-btn" style="text-align:center"><i class="fas fa-exchange-alt"></i> Transactions</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body></html>

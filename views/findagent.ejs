@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Find Agent — My Dream Home</title><link rel="stylesheet" href="css/global.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" /></head>
+<body>
+  <nav class="navbar"><div class="nav-container"><a href="/" class="logo"><img src="images/logo.jpg" alt="Logo"/>My Dream<span>Home</span></a><div class="nav-links" id="navLinks"><a href="/">Home</a><a href="/properties">Properties</a><a href="/about">About</a><a href="/contact">Contact</a><a href="/find" class="active">Find Agent</a><a href="/register" class="btn btn-primary btn-sm">Get Started</a></div><div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></div></div></nav>
+  <div class="page-header"><h1>Find Your <span class="text-red">Agent</span></h1><p>Search for agents who have properties matching your requirements</p></div>
+  <section class="section">
+    <div class="container">
+      <div class="form-card" style="max-width:700px">
+        <h2>Tell us what you're <span class="text-red">looking for</span></h2>
+        <p class="subtitle">We'll match you with the best agents in your city who have properties fitting your criteria.</p>
+        <form action="/findagent" method="POST">
+          <div class="form-row">
+            <div class="form-group"><label>City</label>
+              <select name="city" required>
+                <option value="">Select City</option>
+                <option value="Mumbai">Mumbai</option><option value="Delhi">Delhi</option><option value="Bangalore">Bangalore</option><option value="Chennai">Chennai</option><option value="Hyderabad">Hyderabad</option><option value="Pune">Pune</option><option value="Kolkata">Kolkata</option><option value="Ahmedabad">Ahmedabad</option><option value="Jaipur">Jaipur</option><option value="Lucknow">Lucknow</option><option value="Chandigarh">Chandigarh</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Budget Range</label>
+              <select name="price" required>
+                <option value="0-20000">Under ₹20,000</option><option value="20000-50000">₹20,000 - ₹50,000</option><option value="50000-500000">₹50,000 - ₹5 Lakh</option><option value="500000-3000000">₹5 Lakh - ₹30 Lakh</option><option value="3000000-5000000">₹30 Lakh - ₹50 Lakh</option><option value="5000000-10000000">₹50 Lakh - ₹1 Cr</option><option value="10000000+">Above ₹1 Cr</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Bedrooms</label>
+              <select name="bedrooms" required><option value="1">1 BHK</option><option value="2">2 BHK</option><option value="3">3 BHK</option><option value="4">4 BHK</option><option value="5">5 BHK</option></select>
+            </div>
+            <div class="form-group"><label>Looking to</label>
+              <select name="status" required><option value="rent">Rent</option><option value="sell">Buy</option></select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" style="margin-top:8px"><i class="fas fa-search"></i> Find Matching Agents</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <footer class="footer"><div class="footer-grid"><div class="footer-brand"><div class="logo"><img src="images/logo.jpg" alt="Logo"/>My Dream<span style="color:var(--primary)">Home</span></div><p>India's trusted property platform.</p></div><div><h4>Quick Links</h4><ul><li><a href="/properties?type=buy">Buy</a></li><li><a href="/properties?type=rent">Rent</a></li></ul></div><div><h4>Company</h4><ul><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li></ul></div><div><h4>Contact</h4><ul><li><a href="mailto:tusharagrahari10@gmail.com"><i class="fas fa-envelope" style="margin-right:6px"></i>tusharagrahari10@gmail.com</a></li></ul></div></div><div class="footer-bottom">&copy; 2024 My Dream Home. Built by Tushar Agrahari.</div></footer>
+</body></html>

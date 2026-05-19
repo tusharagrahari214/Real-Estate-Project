@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Admin Dashboard — My Dream Home</title><link rel="stylesheet" href="css/global.css"/><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous"/></head>
+<body>
+  <nav class="navbar"><div class="nav-container"><a href="/" class="logo"><img src="images/logo.jpg" alt="Logo"/>My Dream<span>Home</span></a><div class="nav-links" id="navLinks"><a href="/">Home</a><a href="/admin-queries">Queries</a><a href="/change-password">Password</a><a href="/logout" class="btn btn-primary btn-sm">Logout</a></div><div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></div></div></nav>
+  <div class="page-header"><h1>Admin <span class="text-red">Dashboard</span></h1><p>Full platform management</p></div>
+  <section class="section">
+    <div class="container">
+      <% if (msg) { %><div style="background:#E8F5E9;color:#2E7D32;padding:14px;border-radius:12px;margin-bottom:24px;text-align:center;font-weight:600"><i class="fas fa-check-circle"></i> <%= msg %></div><% } %>
+
+      <!-- Stats -->
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-bottom:32px">
+        <div style="background:var(--bg);padding:24px;border-radius:var(--radius);text-align:center;box-shadow:var(--shadow)"><div style="font-size:2rem;font-weight:800;color:var(--primary)"><%= counts.agents %></div><div style="font-size:0.85rem;color:var(--text-light)">Agents</div></div>
+        <div style="background:var(--bg);padding:24px;border-radius:var(--radius);text-align:center;box-shadow:var(--shadow)"><div style="font-size:2rem;font-weight:800;color:var(--primary)"><%= counts.properties %></div><div style="font-size:0.85rem;color:var(--text-light)">Properties</div></div>
+        <div style="background:var(--bg);padding:24px;border-radius:var(--radius);text-align:center;box-shadow:var(--shadow)"><div style="font-size:2rem;font-weight:800;color:var(--primary)"><%= counts.buyers %></div><div style="font-size:0.85rem;color:var(--text-light)">Buyers</div></div>
+        <div style="background:var(--bg);padding:24px;border-radius:var(--radius);text-align:center;box-shadow:var(--shadow)"><div style="font-size:2rem;font-weight:800;color:var(--primary)"><%= counts.sellers %></div><div style="font-size:0.85rem;color:var(--text-light)">Sellers</div></div>
+        <div style="background:var(--bg);padding:24px;border-radius:var(--radius);text-align:center;box-shadow:var(--shadow)"><div style="font-size:2rem;font-weight:800;color:var(--primary)"><%= counts.transactions %></div><div style="font-size:0.85rem;color:var(--text-light)">Transactions</div></div>
+        <div style="background:var(--bg);padding:24px;border-radius:var(--radius);text-align:center;box-shadow:var(--shadow)"><div style="font-size:2rem;font-weight:800;color:#FF8A65"><%= counts.pending %></div><div style="font-size:0.85rem;color:var(--text-light)">Pending</div></div>
+      </div>
+
+      <div class="admin-grid">
+        <div class="admin-card"><h3><i class="fas fa-database"></i> View & Manage Data</h3><p class="text-light" style="font-size:0.9rem;margin-bottom:16px">View, edit, and delete any record</p>
+          <div class="data-buttons">
+            <a href="/admin-view/agents" class="data-btn"><i class="fas fa-users"></i> Agents</a>
+            <a href="/admin-view/properties" class="data-btn"><i class="fas fa-building"></i> Properties</a>
+            <a href="/admin-view/buyers" class="data-btn"><i class="fas fa-shopping-cart"></i> Buyers</a>
+            <a href="/admin-view/sellers" class="data-btn"><i class="fas fa-store"></i> Sellers</a>
+            <a href="/admin-view/transactions" class="data-btn"><i class="fas fa-exchange-alt"></i> Transactions</a>
+            <a href="/admin-view/offices" class="data-btn"><i class="fas fa-building"></i> Offices</a>
+          </div>
+        </div>
+        <div class="admin-card"><h3><i class="fas fa-plus-circle"></i> Add Records</h3><p class="text-light" style="font-size:0.9rem;margin-bottom:16px">Manually add data</p>
+          <div class="data-buttons">
+            <a href="/admin-add/buyer" class="data-btn"><i class="fas fa-user-plus"></i> Add Buyer</a>
+            <a href="/admin-add/seller" class="data-btn"><i class="fas fa-user-plus"></i> Add Seller</a>
+            <a href="/admin-add/property" class="data-btn"><i class="fas fa-home"></i> Add Property</a>
+            <a href="/admin-add/transaction" class="data-btn"><i class="fas fa-receipt"></i> Add Transaction</a>
+          </div>
+        </div>
+        <div class="admin-card"><h3><i class="fas fa-search"></i> Queries & Reports</h3><p class="text-light" style="font-size:0.9rem;margin-bottom:16px">Run pre-built analytical queries</p>
+          <a href="/admin-queries" class="btn btn-primary btn-sm"><i class="fas fa-play"></i> Open Queries</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</body></html>

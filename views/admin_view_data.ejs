@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Data — My Dream Home</title><link rel="stylesheet" href="/css/global.css"/><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous"/></head>
+<body>
+  <nav class="navbar"><div class="nav-container"><a href="/" class="logo"><img src="/images/logo.jpg" alt="Logo"/>My Dream<span>Home</span></a><div class="nav-links" id="navLinks"><a href="/">Home</a><a href="/admin-dashboard">Dashboard</a><a href="/logout" class="btn btn-primary btn-sm">Logout</a></div><div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></div></div></nav>
+  <section class="section" style="padding-top:100px">
+    <div class="container">
+      <a href="/admin-dashboard" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+      <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:8px"><%= collection.charAt(0).toUpperCase() + collection.slice(1) %> <span class="text-red">Data</span></h2>
+      <p class="text-light" style="margin-bottom:16px"><strong><%= rows.length %></strong> records | <a href="/admin-add/<%= collection === 'offices' ? 'buyer' : collection.slice(0,-1) %>" class="text-red">+ Add New</a></p>
+      <div class="table-wrap" style="overflow-x:auto">
+        <table>
+          <thead><tr><% fields.forEach(function(f){ %><th><%= f %></th><% }); %><th>Actions</th></tr></thead>
+          <tbody><% rows.forEach(function(row, i){ %><tr>
+            <% row.forEach(function(v){ %><td><%= v %></td><% }); %>
+            <td><form action="/admin-delete/<%= collection %>/<%= row[0] %>" method="POST" style="margin:0"><button type="submit" class="data-btn" style="color:#C62828;border-color:#FFCDD2" onclick="return confirm('Delete this record?')"><i class="fas fa-trash"></i></button></form></td>
+          </tr><% }); %></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</body></html>

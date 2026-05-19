@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Properties — My Dream Home</title><link rel="stylesheet" href="css/global.css"/><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous"/></head>
+<body>
+  <nav class="navbar"><div class="nav-container"><a href="/" class="logo"><img src="images/logo.jpg" alt="Logo"/>My Dream<span>Home</span></a><div class="nav-links" id="navLinks"><a href="/">Home</a><a href="/properties" class="active">Properties</a><a href="/about">About</a><a href="/contact">Contact</a><a href="/find">Find Agent</a><% if (user) { %><a href="/logout" class="btn btn-primary btn-sm">Logout</a><% } else { %><a href="/login" class="btn btn-outline btn-sm">Login</a><a href="/register" class="btn btn-primary btn-sm">Sign Up</a><% } %></div><div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></div></div></nav>
+  <div class="page-header"><h1>Browse <span class="text-red">Properties</span></h1><p>Find apartments, houses, hostels & PGs</p></div>
+  <section class="section">
+    <div class="container">
+      <form method="GET" action="/properties" style="margin-bottom:40px">
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:end">
+          <div class="form-group" style="margin:0"><label>Listing</label><select name="type"><option value="">All</option><option value="buy" <%= query.type==='buy'?'selected':'' %>>Buy</option><option value="rent" <%= query.type==='rent'?'selected':'' %>>Rent</option></select></div>
+          <div class="form-group" style="margin:0"><label>Type</label><select name="ptype"><option value="">All</option><option value="apartment" <%= query.ptype==='apartment'?'selected':'' %>>Apartment</option><option value="house" <%= query.ptype==='house'?'selected':'' %>>House</option><option value="villa" <%= query.ptype==='villa'?'selected':'' %>>Villa</option><option value="hostel" <%= query.ptype==='hostel'?'selected':'' %>>Hostel</option><option value="pg" <%= query.ptype==='pg'?'selected':'' %>>PG</option></select></div>
+          <div class="form-group" style="margin:0"><label>City</label><select name="city"><option value="">All</option><% cities.forEach(function(c){ %><option value="<%= c %>" <%= query.city===c?'selected':'' %>><%= c %></option><% }); %></select></div>
+          <div class="form-group" style="margin:0"><label>BHK</label><select name="bedrooms"><option value="">Any</option><option value="1" <%= query.bedrooms==='1'?'selected':'' %>>1</option><option value="2" <%= query.bedrooms==='2'?'selected':'' %>>2</option><option value="3" <%= query.bedrooms==='3'?'selected':'' %>>3</option><option value="4" <%= query.bedrooms==='4'?'selected':'' %>>4+</option></select></div>
+          <button type="submit" class="btn btn-primary" style="height:50px"><i class="fas fa-search"></i> Search</button>
+        </div>
+        <label style="display:flex;align-items:center;gap:6px;font-size:0.9rem;cursor:pointer;margin-top:12px"><input type="checkbox" name="bachelor" value="true" <%= query.bachelor==='true'?'checked':'' %> style="accent-color:var(--primary);width:16px;height:16px"/> Bachelor Friendly Only</label>
+      </form>
+      <% if (properties.length > 0) { %>
+        <p class="text-light" style="margin-bottom:24px"><strong><%= properties.length %></strong> properties found</p>
+        <div class="grid-3">
+          <% properties.forEach(function(p) { %>
+            <a href="/property/<%= p.pid %>" class="card" style="text-decoration:none;color:inherit">
+              <div class="card-img-wrap">
+                <img src="<%= p.images && p.images.length>0 ? '/uploads/'+p.images[0] : 'images/index.jpg' %>" alt="Property"/>
+                <div class="card-badges">
+                  <span class="badge badge-<%= p.listing_type %>"><%= p.listing_type %></span>
+                  <% if(p.property_type){%><span class="badge badge-<%= p.property_type %>"><%= p.property_type %></span><%}%>
+                  <% if(p.bachelor_allowed===false){%><span class="badge badge-no-bachelor">No Bachelors</span><%}else{%><span class="badge badge-bachelor">Bachelor OK</span><%}%>
+                </div>
+              </div>
+              <div class="card-body">
+                <h3><%= p.title || p.street+', '+p.city %></h3>
+                <div class="price">₹<%= p.price?p.price.toLocaleString('en-IN'):'0' %><% if(p.listing_type==='rent'){%><span>/month</span><%}%></div>
+                <div class="card-meta"><span><i class="fas fa-bed"></i> <%= p.number_of_bedroom %> BHK</span><% if(p.area_sqft){%><span><i class="fas fa-ruler-combined"></i> <%= p.area_sqft %> sqft</span><%}%><% if(p.furnished){%><span><i class="fas fa-couch"></i> <%= p.furnished %></span><%}%></div>
+                <div class="card-location"><i class="fas fa-map-marker-alt"></i> <%= p.street %>, <%= p.city %></div>
+                <div style="margin-top:8px;font-size:0.8rem;color:var(--text-light)">ID: #<%= p.pid %></div>
+              </div>
+            </a>
+          <% }); %>
+        </div>
+      <% } else { %>
+        <div class="empty-state"><i class="fas fa-search"></i><h3>No properties found</h3><p>Try adjusting your filters</p></div>
+      <% } %>
+    </div>
+  </section>
+  <footer class="footer"><div class="footer-grid"><div class="footer-brand"><div class="logo"><img src="images/logo.jpg" alt="Logo"/>My Dream<span style="color:var(--primary)">Home</span></div><p>India's trusted property platform.</p></div><div><h4>Links</h4><ul><li><a href="/properties?type=buy">Buy</a></li><li><a href="/properties?type=rent">Rent</a></li></ul></div><div><h4>Company</h4><ul><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li></ul></div><div><h4>Contact</h4><ul><li><a href="mailto:tusharagrahari10@gmail.com"><i class="fas fa-envelope" style="margin-right:6px"></i>tusharagrahari10@gmail.com</a></li></ul></div></div><div class="footer-bottom">&copy; 2024 My Dream Home. Built by Tushar Agrahari.</div></footer>
+</body></html>

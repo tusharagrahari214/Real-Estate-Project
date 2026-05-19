@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Register — My Dream Home</title><link rel="stylesheet" href="css/global.css"/><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous"/></head>
+<body>
+  <nav class="navbar"><div class="nav-container"><a href="/" class="logo"><img src="images/logo.jpg" alt="Logo"/>My Dream<span>Home</span></a><div class="nav-links" id="navLinks"><a href="/">Home</a><a href="/properties">Properties</a><a href="/about">About</a><a href="/contact">Contact</a><a href="/login" class="btn btn-outline btn-sm">Login</a><a href="/register" class="btn btn-primary btn-sm active">Sign Up</a></div><div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></div></div></nav>
+  <div class="auth-page">
+    <div class="auth-card" style="max-width:520px">
+      <h2>Create <span class="text-red">Account</span></h2>
+      <p class="subtitle">Register as a buyer or seller</p>
+      <% if (error) { %><div class="error-msg"><%= error %></div><% } %>
+      <% if (success) { %><div style="background:#E8F5E9;color:#2E7D32;padding:12px;border-radius:12px;font-size:0.9rem;margin-bottom:20px;text-align:center"><i class="fas fa-check-circle"></i> <%= success %></div><% } %>
+      <form action="/register" method="POST">
+        <div class="form-group"><label>I want to</label>
+          <select name="role" required id="regRole" onchange="document.getElementById('upiField').style.display=this.value==='seller'?'block':'none'">
+            <option value="buyer">Buy / Rent a Property</option>
+            <option value="seller">Sell / List a Property</option>
+          </select>
+        </div>
+        <div class="form-row"><div class="form-group"><label>First Name</label><input type="text" name="fname" required/></div><div class="form-group"><label>Last Name</label><input type="text" name="lname"/></div></div>
+        <div class="form-group"><label>Email</label><input type="email" name="email" required placeholder="you@email.com"/></div>
+        <div class="form-group"><label>Phone</label><input type="tel" name="phoneno" required placeholder="+91-9876543210"/></div>
+        <div class="form-group"><label>Password</label><input type="password" name="password" required minlength="4"/></div>
+        <div class="form-group" id="upiField" style="display:none"><label>UPI ID (for receiving payments)</label><input type="text" name="upi_id" placeholder="yourname@upi"/></div>
+        <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-user-plus"></i> Create Account</button>
+      </form>
+      <div class="divider">or</div>
+      <p style="text-align:center;font-size:0.9rem;color:var(--text-light)">Already registered? <a href="/login" class="text-red" style="font-weight:600">Login here</a></p>
+      <p style="text-align:center;font-size:0.85rem;color:var(--text-light);margin-top:8px">Want to be an agent? <a href="/apply-agent" class="text-red" style="font-weight:600">Apply here</a></p>
+    </div>
+  </div>
+</body></html>

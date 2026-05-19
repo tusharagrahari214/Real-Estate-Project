@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Global styles */
+body {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background-image: url("/images/6.jpg");
+  background-color: #cccccc; /* Used if the image is unavailable */
+  height: 500px; /* You must set a specified height */
+  background-position: center-top; /* Center the image */
+  background-repeat: repeat-y; /* Do not repeat the image */
+  background-size: cover;
+}
+
+header {
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+.logo img {
+  width: 50px;
+  height: 50px;
+  margin: 0px;
+  padding: 0px;
+  border-radius: 20%;
+}
+header h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav ul li {
+  margin-right: 1rem;
+}
+
+nav ul li:last-child {
+  margin-right: 0;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+  background-color: #fff;
+  color: #333;
+}
+.run {
+  width: 60%;
+  height: 50%;
+  position: absolute; /* set the position to absolute */
+  top: 50%; /* set the top position to 50% */
+  left: 50%; /* set the left position to 50% */
+  transform: translate(-50%, -50%);
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: wheat;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+}
+
+label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: white;
+}
+
+input,
+textarea,
+select {
+  font-size: 1.2rem;
+  padding: 5px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  margin-bottom: 10px;
+  height: 50px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  font-size: 1.2rem;
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+footer {
+  background-color: #f8e8e8;
+  color: #51876c;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
+.logo {
+  width: 150px;
+}
+
+.social a {
+  color: #6a5959;
+  text-decoration: none;
+  margin-right: 1rem;
+}
+
+.social a:last-child {
+  margin-right: 0;
+}
+
+.social i {
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.social i:hover {
+  transform: translateY(-0.25rem);
+  color: aquamarine;
+}

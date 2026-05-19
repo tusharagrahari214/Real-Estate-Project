@@ -1,0 +1,31 @@
+{
+  "name": "real-estate-management-system",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "real-estate",
+    "property-management",
+    "nodejs",
+    "express",
+    "mongodb"
+  ],
+  "author": "Tushar Agrahari <tusharagrahari10@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.6.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.19.0",
+    "mongoose": "^8.24.0",
+    "multer": "^2.1.1",
+    "nodemon": "^2.0.22",
+    "static": "^2.0.0"
+  },
+  "description": "A real estate management system for property listing, tenant management, and agent tracking"
+}

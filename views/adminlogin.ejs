@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Admin Login — My Dream Home</title><link rel="stylesheet" href="css/global.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" /></head>
+<body>
+  <nav class="navbar"><div class="nav-container"><a href="/" class="logo"><img src="images/logo.jpg" alt="Logo"/>My Dream<span>Home</span></a><div class="nav-links" id="navLinks"><a href="/">Home</a><a href="/properties">Properties</a><a href="/about">About</a><a href="/contact">Contact</a><a href="/register" class="btn btn-primary btn-sm">Get Started</a></div><div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></div></div></nav>
+  <div class="auth-page">
+    <div class="auth-card">
+      <div style="text-align:center;font-size:3rem;margin-bottom:16px">🔐</div>
+      <h2>Admin <span class="text-red">Login</span></h2>
+      <p class="subtitle">Access the administration panel</p>
+      <% if (typeof error !== 'undefined' && error !== 'An error occurred') { %><div class="error-msg"><%= error %></div><% } %>
+      <form action="/adminlogin" method="POST">
+        <div class="form-group"><label>Username</label><input type="text" name="username" required placeholder="@tushar1" /></div>
+        <div class="form-group"><label>Password</label><input type="password" name="password" required placeholder="Enter password" /></div>
+        <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt"></i> Login</button>
+      </form>
+      <div class="divider">or</div>
+      <p style="text-align:center;font-size:0.9rem;color:var(--text-light)"><a href="/agentlogin" class="text-red" style="font-weight:600">Agent Login</a> · <a href="/officelogin" class="text-red" style="font-weight:600">Office Login</a></p>
+    </div>
+  </div>
+</body></html>

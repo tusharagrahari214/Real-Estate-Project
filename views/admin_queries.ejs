@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Queries — My Dream Home</title><link rel="stylesheet" href="css/global.css"/><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous"/></head>
+<body>
+  <nav class="navbar"><div class="nav-container"><a href="/" class="logo"><img src="images/logo.jpg" alt="Logo"/>My Dream<span>Home</span></a><div class="nav-links" id="navLinks"><a href="/admin-dashboard">Dashboard</a><a href="/logout" class="btn btn-primary btn-sm">Logout</a></div><div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></div></div></nav>
+  <section class="section" style="padding-top:100px">
+    <div class="container">
+      <a href="/admin-dashboard" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
+      <div class="form-card" style="max-width:700px">
+        <h2>Run <span class="text-red">Query</span></h2>
+        <form action="/admin-runquery" method="POST">
+          <div class="form-group"><label>Select Query</label>
+            <select name="topic" required>
+              <option value="">Choose...</option>
+              <option value="q1">🏠 Rental properties in Delhi (post-2020)</option>
+              <option value="q2">💰 Bangalore properties ₹30L-50L</option>
+              <option value="q3">🛏️ MG Road rentals 2+ BHK under ₹35K</option>
+              <option value="q4">🏆 Top performing agent</option>
+              <option value="q5">📊 Avg price by agent (2024)</option>
+              <option value="q6">💎 Most expensive for sale</option>
+              <option value="q7">🔑 Most expensive for rent</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-play"></i> Run</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</body></html>

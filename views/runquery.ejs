@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Search Properties — My Dream Home</title><link rel="stylesheet" href="css/global.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" /></head>
+<body>
+  <nav class="navbar"><div class="nav-container"><a href="/" class="logo"><img src="images/logo.jpg" alt="Logo"/>My Dream<span>Home</span></a><div class="nav-links" id="navLinks"><a href="/">Home</a><a href="/properties">Properties</a><a href="/find">Find Agent</a><a href="/back" class="btn btn-primary btn-sm">Dashboard</a></div><div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></div></div></nav>
+  <div class="page-header"><h1>Property <span class="text-red">Queries</span></h1><p>Run pre-built analytical queries on property data</p></div>
+  <section class="section">
+    <div class="container">
+      <div class="form-card" style="max-width:700px">
+        <h2>Select a <span class="text-red">Query</span></h2>
+        <p class="subtitle">Choose from pre-built queries to analyze property data</p>
+        <form action="/runquery" method="POST">
+          <div class="form-group"><label>Choose Query</label>
+            <select name="topic" required>
+              <option value="">Select a query...</option>
+              <option value="q1">🏠 Rental properties in Delhi (built after 2020)</option>
+              <option value="q2">💰 Properties in Bangalore (₹30L - ₹50L)</option>
+              <option value="q3">🛏️ Rentals on MG Road (2+ BHK, under ₹35K)</option>
+              <option value="q4">🏆 Top performing agent (by sales in 2023)</option>
+              <option value="q5">📊 Agent-wise avg property price (2022 listings)</option>
+              <option value="q6">💎 Most expensive property for sale</option>
+              <option value="q7">🔑 Most expensive property for rent</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-play"></i> Run Query</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</body></html>

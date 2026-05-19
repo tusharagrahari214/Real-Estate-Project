@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Agent Dashboard — My Dream Home</title><link rel="stylesheet" href="css/global.css"/><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous"/></head>
+<body>
+  <nav class="navbar"><div class="nav-container"><a href="/" class="logo"><img src="images/logo.jpg" alt="Logo"/>My Dream<span>Home</span></a><div class="nav-links" id="navLinks"><a href="/">Home</a><a href="/properties">Properties</a><a href="/change-password">Password</a><a href="/logout" class="btn btn-primary btn-sm">Logout</a></div><div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></div></div></nav>
+  <div class="page-header"><h1>Agent <span class="text-red"><%= user.name %></span></h1><p>City: <%= user.city %> | Properties Sold: <%= agent ? agent.NOP_sale : 0 %></p></div>
+  <section class="section">
+    <div class="container">
+      <% if (locked.length > 0) { %>
+      <div class="admin-card" style="margin-bottom:24px;border-left:4px solid var(--primary)">
+        <h3><i class="fas fa-bell" style="color:var(--primary)"></i> Locked Properties — Action Required</h3>
+        <p class="text-light" style="margin-bottom:12px">These properties have been locked by buyers. Mark as sold after deal is finalized.</p>
+        <% locked.forEach(function(p) { %><div style="padding:16px;background:var(--bg-alt);border-radius:8px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center">
+          <div><strong>#<%= p.pid %></strong> — <%= p.title || p.street %> | ₹<%= p.price ? p.price.toLocaleString('en-IN') : 0 %> | Locked by Buyer #<%= p.locked_by %></div>
+          <form action="/agent-mark-sold" method="POST" style="margin:0"><input type="hidden" name="pid" value="<%= p.pid %>"/><input type="hidden" name="buyer_id" value="<%= p.locked_by %>"/><button type="submit" class="btn btn-primary btn-sm" onclick="return confirm('Mark as sold?')"><i class="fas fa-check"></i> Mark Sold</button></form>
+        </div><% }); %>
+      </div><% } %>
+      <div class="admin-grid">
+        <div class="admin-card"><h3><i class="fas fa-building"></i> My Properties (<%= properties.length %>)</h3>
+          <% properties.forEach(function(p) { %><div style="padding:10px;background:var(--bg-alt);border-radius:8px;margin-bottom:6px"><strong>#<%= p.pid %></strong> — <%= p.title || p.street %> — ₹<%= p.price ? p.price.toLocaleString('en-IN') : 0 %> <span class="badge badge-<%= p.status %>"><%= p.status %></span></div><% }); %>
+          <% if(!properties.length){%><p class="text-light">No assigned properties</p><%}%>
+        </div>
+        <div class="admin-card"><h3><i class="fas fa-city"></i> All Properties in <%= user.city %> (<%= cityProperties.length %>)</h3>
+          <% cityProperties.slice(0,10).forEach(function(p) { %><div style="padding:10px;background:var(--bg-alt);border-radius:8px;margin-bottom:6px"><strong>#<%= p.pid %></strong> — <%= p.title || p.street %> — ₹<%= p.price ? p.price.toLocaleString('en-IN') : 0 %></div><% }); %>
+          <% if(cityProperties.length>10){%><p class="text-light" style="margin-top:8px">+<%= cityProperties.length-10 %> more...</p><%}%>
+        </div>
+        <div class="admin-card"><h3><i class="fas fa-users"></i> All Buyers (<%= buyers.length %>)</h3>
+          <div style="max-height:300px;overflow-y:auto"><% buyers.slice(0,10).forEach(function(b) { %><div style="padding:8px;border-bottom:1px solid var(--border);font-size:0.9rem">#<%= b.buyer_id %> — <%= b.fname %> <%= b.lname %> — <%= b.phoneno %></div><% }); %></div>
+        </div>
+        <div class="admin-card"><h3><i class="fas fa-store"></i> All Sellers (<%= sellers.length %>)</h3>
+          <div style="max-height:300px;overflow-y:auto"><% sellers.slice(0,10).forEach(function(s) { %><div style="padding:8px;border-bottom:1px solid var(--border);font-size:0.9rem">#<%= s.seller_id %> — <%= s.fname %> <%= s.lname %> — <%= s.phoneno %></div><% }); %></div>
+        </div>
+        <div class="admin-card"><h3><i class="fas fa-receipt"></i> My Transactions (<%= transactions.length %>)</h3>
+          <% transactions.forEach(function(t) { %><div style="padding:10px;background:var(--bg-alt);border-radius:8px;margin-bottom:6px">#<%= t.transaction_id %> — Prop #<%= t.pid %> — ₹<%= t.transaction_amount ? t.transaction_amount.toLocaleString('en-IN') : 0 %></div><% }); %>
+          <% if(!transactions.length){%><p class="text-light">No transactions yet</p><%}%>
+        </div>
+      </div>
+    </div>
+  </section>
+</body></html>

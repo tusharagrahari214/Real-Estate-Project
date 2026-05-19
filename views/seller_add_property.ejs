@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>List Property — My Dream Home</title><link rel="stylesheet" href="css/global.css"/><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous"/></head>
+<body>
+  <nav class="navbar"><div class="nav-container"><a href="/" class="logo"><img src="images/logo.jpg" alt="Logo"/>My Dream<span>Home</span></a><div class="nav-links" id="navLinks"><a href="/seller-dashboard">Dashboard</a><a href="/change-password">Password</a><a href="/logout" class="btn btn-primary btn-sm">Logout</a></div><div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></div></div></nav>
+  <section class="section" style="padding-top:100px">
+    <div class="container">
+      <a href="/seller-dashboard" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
+      <div class="form-card" style="max-width:700px">
+        <h2>List Your <span class="text-red">Property</span></h2>
+        <p class="subtitle">Submit for office review. Agent will be assigned by the office after verification.</p>
+        <form action="/seller-add-property" method="POST" enctype="multipart/form-data">
+          <div class="form-group"><label>Property Title</label><input type="text" name="title" required placeholder="Beautiful 2BHK in Andheri"/></div>
+          <div class="form-group"><label>Description</label><textarea name="description" placeholder="Amenities, landmarks, etc."></textarea></div>
+          <div class="form-row"><div class="form-group"><label>Price (₹)</label><input type="number" name="price" required/></div><div class="form-group"><label>Area (sqft)</label><input type="number" name="area_sqft"/></div></div>
+          <div class="form-row"><div class="form-group"><label>Listing Type</label><select name="listing_type" required><option value="rent">Rent</option><option value="buy">Buy (Sell)</option></select></div><div class="form-group"><label>Property Type</label><select name="property_type" required><option value="apartment">Apartment</option><option value="house">House</option><option value="villa">Villa</option><option value="flat">Flat</option><option value="hostel">Hostel</option><option value="pg">PG</option></select></div></div>
+          <div class="form-row"><div class="form-group"><label>Bedrooms</label><select name="bedrooms"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div><div class="form-group"><label>Furnished</label><select name="furnished"><option value="unfurnished">Unfurnished</option><option value="semi-furnished">Semi</option><option value="furnished">Furnished</option></select></div></div>
+          <div class="form-row"><div class="form-group"><label>City</label><input type="text" name="city" required/></div><div class="form-group"><label>Street</label><input type="text" name="street" required/></div></div>
+          <div class="form-row"><div class="form-group"><label>Postal Code</label><input type="text" name="postalcode"/></div><div class="form-group"><label>Year Built</label><input type="number" name="yoc"/></div></div>
+          <div class="form-group"><label>Bachelor Allowed?</label><select name="bachelor_allowed"><option value="true">Yes</option><option value="false">No</option></select></div>
+          <div class="form-group"><label>Property Images</label><input type="file" name="images" multiple accept="image/*" style="padding:10px;border:2px dashed var(--border);border-radius:var(--radius);width:100%"/><p style="font-size:0.8rem;color:var(--text-light);margin-top:4px">Up to 5 images</p></div>
+          <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-paper-plane"></i> Submit for Review</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</body></html>

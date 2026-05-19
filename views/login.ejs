@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Login — My Dream Home</title><link rel="stylesheet" href="css/global.css"/><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous"/></head>
+<body>
+  <nav class="navbar"><div class="nav-container"><a href="/" class="logo"><img src="images/logo.jpg" alt="Logo"/>My Dream<span>Home</span></a><div class="nav-links" id="navLinks"><a href="/">Home</a><a href="/properties">Properties</a><a href="/about">About</a><a href="/contact">Contact</a><a href="/register" class="btn btn-primary btn-sm">Sign Up</a></div><div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></div></div></nav>
+  <div class="auth-page">
+    <div class="auth-card" style="max-width:460px">
+      <div style="text-align:center;font-size:3rem;margin-bottom:16px">🔐</div>
+      <h2>Welcome <span class="text-red">Back</span></h2>
+      <p class="subtitle">Login to your account</p>
+      <% if (error) { %><div class="error-msg"><%= error %></div><% } %>
+      <form action="/login" method="POST" id="loginForm">
+        <div class="form-group"><label>I am a</label>
+          <select name="role" id="roleSelect" required onchange="toggleFields()">
+            <option value="">Select your role...</option>
+            <option value="admin">Admin</option>
+            <option value="office">Office Staff</option>
+            <option value="agent">Agent</option>
+            <option value="seller">Seller</option>
+            <option value="buyer">Buyer</option>
+          </select>
+        </div>
+        <div class="form-group" id="usernameField" style="display:none"><label>Username</label><input type="text" name="username" placeholder="@tushar1"/></div>
+        <div class="form-group" id="emailField" style="display:none"><label>Email</label><input type="email" name="email" placeholder="you@email.com"/></div>
+        <div class="form-group"><label>Password</label><input type="password" name="password" required placeholder="Enter password"/></div>
+        <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt"></i> Login</button>
+      </form>
+      <div class="divider">or</div>
+      <p style="text-align:center;font-size:0.9rem;color:var(--text-light)">Don't have an account? <a href="/register" class="text-red" style="font-weight:600">Sign up as Buyer/Seller</a></p>
+      <p style="text-align:center;font-size:0.85rem;color:var(--text-light);margin-top:8px">Want to be an agent? <a href="/apply-agent" class="text-red" style="font-weight:600">Apply here</a></p>
+    </div>
+  </div>
+  <script>
+    function toggleFields(){const r=document.getElementById('roleSelect').value;const u=document.getElementById('usernameField');const e=document.getElementById('emailField');u.style.display='none';e.style.display='none';if(['admin','office','agent'].includes(r)){u.style.display='block';u.querySelector('input').required=true;e.querySelector('input').required=false;}else if(['seller','buyer'].includes(r)){e.style.display='block';e.querySelector('input').required=true;u.querySelector('input').required=false;}}
+  </script>
+</body></html>
