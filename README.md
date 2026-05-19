@@ -67,7 +67,7 @@ A full-stack real estate platform for buying, renting, and managing properties a
 | **Backend** | Node.js, Express.js |
 | **Frontend** | EJS (Embedded JavaScript Templates) |
 | **Database** | MongoDB Atlas (Mongoose ODM) |
-| **Styling** | Custom CSS Design System (Nike/Coca-Cola inspired) |
+| **Styling** | Custom CSS Design System |
 | **Auth** | Express-Session |
 | **File Upload** | Multer |
 | **Icons** | Font Awesome 6 |
